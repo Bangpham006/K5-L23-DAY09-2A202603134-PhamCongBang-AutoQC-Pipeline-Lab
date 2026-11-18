@@ -1,4 +1,4 @@
-# Báo cáo Day 09 — Phạm Công Bằng, 2A202603134
+# Báo cáo Day 09 - Phạm Công Bằng, 2A202603134
 
 ## 1. Kết luận trước
 Pipeline đưa ra kết luận Hold.
