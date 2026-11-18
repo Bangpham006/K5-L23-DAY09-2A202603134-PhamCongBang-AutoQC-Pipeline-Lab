@@ -1,0 +1,18 @@
+{
+  "verdict": {
+    "decision": "Hold",
+    "n_errors": 0,
+    "n_warn_images": 44,
+    "n_images": 203,
+    "warn_ratio": 0.2167,
+    "reasons": [
+      "Tỉ lệ ảnh còn cảnh báo (44/203 = 21.7%) >= ngưỡng 10.0%."
+    ]
+  },
+  "reviewed": 80,
+  "budget": 80,
+  "seconds": 14.4,
+  "exported": "D:\\Day09_Lab_VinUni\\submission\\export\\clean_v1",
+  "config_sha1": "35ffc8ad73adf12f0a6b27bb30833826e78d3923",
+  "review_sim_sha1": "7988ca22827f780a7043a2300490e679a1697154"
+}
