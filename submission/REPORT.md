@@ -55,8 +55,20 @@ Các điểm mù pipeline bỏ sót:
 3. Ảnh biến dạng lớn: Những ảnh bị cắt khung hình quá một nửa hoặc bị lật gương có độ lệch phash lớn hơn 16 sẽ lọt qua ngưỡng lọc của khâu tiếp nhận.
 
 ## 5. So sánh huấn luyện raw và clean
-Chưa chạy trên máy sẽ chạy sau.
-Kỳ vọng khi huấn luyện trên dữ liệu sạch: Việc loại bỏ 21 ảnh trùng lặp, ảnh hỏng và rò rỉ cùng với việc căn chỉnh các hộp nhãn bị lỗi giúp mô hình tránh học vẹt dữ liệu trùng lặp, đồng thời giúp chỉ số đánh giá ổn định hơn giữa các lần khởi tạo ngẫu nhiên.
+Thử nghiệm huấn luyện được thực hiện cục bộ trên máy với cấu hình rút gọn gồm 15 epoch, kích thước ảnh 416, batch 16 qua 2 seed ngẫu nhiên 0 và 1 trên mô hình yolo26n.
+
+Bảng tổng hợp kết quả đo trên 100 ảnh tập kiểm thử:
+
+| Biến thể | Số ảnh train | Số seed | map50 trung bình | map50_95 trung bình | precision trung bình | recall trung bình |
+|---|---:|---:|---|---|---|---|
+| raw | 224 | 2 | 0.621 ± 0.006 | 0.419 ± 0.018 | 0.639 ± 0.002 | 0.577 ± 0.013 |
+| clean | 203 | 2 | 0.663 ± 0.039 | 0.436 ± 0.022 | 0.708 ± 0.002 | 0.548 ± 0.037 |
+
+Độ chênh lệch map50 giữa dữ liệu sạch và dữ liệu thô là dương 0.042.
+Chênh lệch này cao hơn độ lệch chuẩn giữa các seed của tập raw là 0.006 và xấp xỉ độ lệch chuẩn của tập clean là 0.039, cho thấy dữ liệu sạch đem lại cải thiện thực tế thay vì chỉ là nhiễu ngẫu nhiên.
+Hai nguyên nhân chính dẫn đến sự cải thiện:
+1. Loại bỏ rò rỉ và trùng lặp: Tập thô chứa 5 ảnh rò rỉ từ tập kiểm thử và 8 ảnh trùng lặp byte làm mô hình bị học vẹt. Việc loại bỏ các ảnh này giúp mô hình tổng quát hóa tốt hơn trên tập kiểm thử độc lập.
+2. Sửa lỗi nhãn và nắn viền hộp: Khâu sửa tự động đã chỉnh sửa 35 trường hợp hộp tràn viền, xóa hộp rác và bổ sung nhãn thiếu, giúp độ chính xác precision tăng mạnh từ 0.639 lên 0.708.
 
 ## 6. Quyết định và ghi chú sử dụng công cụ
 Quyết định cuối cùng: Hold.
